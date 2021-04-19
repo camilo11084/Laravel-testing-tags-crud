@@ -9,10 +9,22 @@
     <body class="antialiased">
        <h4>Listado de Etiquetas</h4>
        <table>
+            <form action="tags" method="post">
+                @csrf
+                <input type="text" name="name">
+                <input type="submit" value="Agregar">
+            </form>
             @forelse($tags as $tag)
             <tr>
                 <td>
                     {{ $tag->name }}
+                </td>
+                <td>
+                    <form action="tags/{{ $tag->id }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Eliminar">
+                    </form>
                 </td>
             </tr>
             @empty
